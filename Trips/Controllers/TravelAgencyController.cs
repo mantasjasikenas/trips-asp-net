@@ -5,14 +5,13 @@ namespace TripsAgency.Controllers;
 
 public class TravelAgencyController : Controller
 {
-    private readonly ILogger<CustomerController> _logger;
+    private readonly ILogger<TravelAgencyController> _logger;
 
-    public TravelAgencyController(ILogger<CustomerController> logger)
+    public TravelAgencyController(ILogger<TravelAgencyController> logger)
     {
         _logger = logger;
     }
-
-
+    
     [HttpGet]
     public ActionResult Index()
     {
@@ -20,9 +19,7 @@ public class TravelAgencyController : Controller
 
         try
         {
-            /* agencies = _db
-                     .Select("travel_agencies")
-                     .ToList<TravelAgency>();*/
+            // Get the data from the database
         }
         catch (Exception ex)
         {

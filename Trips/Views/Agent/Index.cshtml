@@ -10,11 +10,11 @@
 </div>
 
 <div class="main-content-header">
-
-    <span class="actions">
+    <div class="container-fluid d-flex d-row justify-content-between">
         <a href="@Url.Action("Create")" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i> Create new agent</a>
         <a href="@Url.Action("Create", "AgentOrders")" class="btn btn-outline-info btn-sm"><i class="fa-solid fa-plus"></i> Create new agent orders</a>
-    </span>
+    </div>
+    <br/>
 </div>
 
 
@@ -68,7 +68,7 @@
                     @Html.DisplayFor(model => agent.FkTravelAgencyTitle)
                 </td>
                 <td>
-                    <a href="@Url.Action("Index", "AgentOrders", new {id = agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Orders</a>
+                    <a href="@Url.Action("Index", "AgentOrders", new {id = agent.Id})" class="btn btn-outline-info btn-sm"><i class="fa-solid fa-pen-to-square"></i> Orders</a>
                 </td>
                 <td>
                     <a href="@Url.Action("Edit", new {id = agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit</a>

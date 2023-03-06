@@ -52,7 +52,6 @@ public class AgentController : Controller
 
         _agentsRepository.UpdateAgent(id, agent);
 
-        //save success, go back to the entity list
         return RedirectToAction("Index");
     }
 
@@ -76,7 +75,6 @@ public class AgentController : Controller
 
         _agentsRepository.InsertAgent(agent);
 
-        //save success, go back to the entity list
         return RedirectToAction("Index");
     }
 

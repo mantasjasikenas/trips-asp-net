@@ -46,10 +46,7 @@ public class AgentOrdersController : Controller
     {
         var agentOrders = new AgentOrdersE
         {
-            Orders = new List<OrderE>
-            {
-                new()
-            },
+            Orders = new List<OrderE>(),
             Agent = new Agent()
         };
         PopulateSelections();
@@ -102,7 +99,7 @@ public class AgentOrdersController : Controller
     [HttpGet]
     public ActionResult ResetEdit(int id)
     {
-        return RedirectToAction("Edit", new {id}); //View(agentOrders);
+        return RedirectToAction("Edit", new {id});
     }
 
     [HttpPost]
@@ -117,17 +114,17 @@ public class AgentOrdersController : Controller
         });
         PopulateSelections();
 
-        return View(returnTo, agentOrdersE); //"Edit"
+        return View(returnTo, agentOrdersE);
     }
 
     [HttpPost]
     [Route("AgentOrders/Edit/{id:int}/DeleteOrder/{index:int}")]
     public ActionResult DeleteOrder(int id, int index, AgentOrdersE agentOrdersE, string returnTo)
     {
-        agentOrdersE.Orders.RemoveAt(index);
+        agentOrdersE.Orders?.RemoveAt(index);
         PopulateSelections();
 
-        return View(returnTo, agentOrdersE); //"Edit"
+        return View(returnTo, agentOrdersE);
     }
 
 
@@ -183,79 +180,4 @@ public class AgentOrdersController : Controller
                                       Text = $"{it.Nr} - {it.Destination}"
                                   });
     }
-
-    /*
-    [HttpGet]
-    public ActionResult Create()
-    {
-        var agent = new Agent();
-        PopulateSelections(agent);
-
-        return View(agent);
-    }
-
-    [HttpPost]
-    public ActionResult Create(Agent agent)
-    {
-        if (!ModelState.IsValid)
-        {
-            PopulateSelections(agent);
-            return View(agent);
-        }
-
-        _agentsRepository.InsertAgent(agent);
-
-        //save success, go back to the entity list
-        return RedirectToAction("Index");
-    }
-
-    [HttpGet]
-    public ActionResult Delete(int id)
-    {
-        Agent agent = new();
-        try
-        {
-            agent = _agentsRepository.GetAgent(id);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-        }
-
-        return View(agent);
-    }
-
-
-    [HttpPost]
-    public ActionResult DeleteConfirm(int id)
-    {
-        try
-        {
-            _agentsRepository.DeleteAgent(id);
-
-            return RedirectToAction("Index");
-        }
-        catch (MySqlException)
-        {
-            ViewData["deletionNotPermitted"] = true;
-
-            var agent = new Agent();
-
-            return View("Delete", agent);
-        }
-    }
-
-    private void PopulateSelections(Agent agent)
-    {
-        var travelAgencies = _agentsRepository.GetTravelAgencies();
-
-        ViewData["travelAgencies"] =
-            travelAgencies.Select(it => new SelectListItem
-                          {
-                              Value = it.Id.ToString(),
-                              Text = $"{it.Id} - {it.Title}",
-                              Selected = it.Id == agent.FkTravelAgencyId
-                          })
-                          .ToList();
-    }*/
 }

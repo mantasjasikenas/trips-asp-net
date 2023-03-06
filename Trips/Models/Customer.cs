@@ -24,7 +24,6 @@ public class Customer
     [DisplayName("Birth date")]
     [Column("birth_date")]
     [DataType(DataType.Date)]
-    //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
     [Required]
     public DateTime BirthDate { get; set; }
 

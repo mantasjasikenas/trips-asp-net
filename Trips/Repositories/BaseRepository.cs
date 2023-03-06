@@ -6,53 +6,18 @@ namespace TripsAgency.Database;
 
 public class BaseRepository
 {
-    protected readonly DbContext _dbContext;
+    protected readonly DbContext DbContext;
 
-    public BaseRepository(DbContext dbContext)
+    protected BaseRepository(DbContext dbContext)
     {
-        _dbContext = dbContext;
+        DbContext = dbContext;
     }
 
-
-    public void Insert(string tableName, Dictionary<string, string> data)
-    {
-        var columns = string.Join(", ", data.Keys);
-        var values = string.Join(", ", data.Values.Select(x => $"\"{x}\""));
-
-        var query = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
-
-        using var connection = _dbContext.CreateConnection();
-        using var command = new MySqlCommand(query, connection);
-        connection.Open();
-        command.ExecuteNonQuery();
-    }
-
-    public void Update(string tableName, Dictionary<string, string> data, string whereCondition)
-    {
-        var setValues = string.Join(", ", data.Select(x => $"{x.Key}=\"{x.Value}\""));
-        var query = $"UPDATE {tableName} SET {setValues} WHERE {whereCondition}";
-
-        using var connection = _dbContext.CreateConnection();
-        using var command = new MySqlCommand(query, connection);
-        connection.Open();
-        command.ExecuteNonQuery();
-    }
-
-    public void Delete(string tableName, string whereCondition)
-    {
-        var query = $"DELETE FROM {tableName} WHERE {whereCondition}";
-
-        using var connection = _dbContext.CreateConnection();
-        using var command = new MySqlCommand(query, connection);
-        connection.Open();
-        command.ExecuteNonQuery();
-    }
-
-    public DataTable Select(string tableName)
+    protected DataTable Select(string tableName)
     {
         var query = $"SELECT * FROM {tableName}";
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
 
@@ -62,10 +27,19 @@ public class BaseRepository
         return dataTable;
     }
 
-
-    public void ExecuteNonQuery(string query)
+    protected void Delete(string tableName, string whereCondition)
     {
-        using var connection = _dbContext.CreateConnection();
+        var query = $"DELETE FROM {tableName} WHERE {whereCondition}";
+
+        using var connection = DbContext.CreateConnection();
+        using var command = new MySqlCommand(query, connection);
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
+
+    protected void ExecuteNonQuery(string query)
+    {
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
 
         connection.Open();
@@ -74,9 +48,9 @@ public class BaseRepository
 
     public ulong GetLastInsertId()
     {
-        var query = """SELECT LAST_INSERT_ID() AS id LIMIT 1""";
+        const string query = """SELECT LAST_INSERT_ID() AS id LIMIT 1""";
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
 
         using var adapter = new MySqlDataAdapter(command);

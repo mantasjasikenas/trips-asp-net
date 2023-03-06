@@ -1,13 +1,13 @@
 ﻿@model Trips.Models.Agent
 
-@* this will also be used as page title in main layout *@
 @{
-    ViewData["title"] = "Modelio redagavimas";
+    ViewData["title"] = "Edit agent";
 }
 
 @* content header *@
 <div class="main-content-header">
     <h4 class="title">@ViewData["title"]</h4>
+    <br/>
 </div>
 
 @* content itself *@
@@ -17,8 +17,7 @@
         @Html.AntiForgeryToken()
 
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-		@* add hidden form fields for non-visible properties, otherwise they will get lost in code that handles button presses *@
+        
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.FkTravelAgencyTitle)
 
@@ -55,7 +54,8 @@
 
         </fieldset>
 
-        <div class="container-fluid d-flex d-row justify-content-end">
+        <br/>
+        <div class="container-fluid d-flex d-row justify-content-start ps-0">
             <span class="actions">
                 <a href="@Url.Action("Index")"
                    class="btn btn-outline-danger btn-sm">
@@ -70,10 +70,4 @@
 @* content footer *@
 <div class="main-content-footer">
     <span class="title"></span>
-    @*<span class="actions">
-        <a href="@Url.Action("Index")"
-           class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
-        </a>
-    </span>*@
 </div>

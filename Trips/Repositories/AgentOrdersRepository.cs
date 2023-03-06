@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Globalization;
 using MySql.Data.MySqlClient;
 using Trips.Models;
 using TripsAgency.Database;
@@ -57,7 +56,7 @@ public class AgentOrdersRepository : BaseRepository
                     orders.fk_agent = {agentId}
                 """;
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
 
@@ -103,7 +102,7 @@ public class AgentOrdersRepository : BaseRepository
                     orders.fk_agent = {agentId}
                 """;
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
 
@@ -116,7 +115,7 @@ public class AgentOrdersRepository : BaseRepository
     public void UpdateAgentOrders(AgentOrdersE agentOrdersE)
     {
         var agent = agentOrdersE.Agent;
-        var modifiedOrders = agentOrdersE.Orders;
+        var modifiedOrders = agentOrdersE.Orders ?? new List<OrderE>();
         var initialOrders = GetOrdersEdit(agent.Id);
         var removedOrders = initialOrders
                             .Except(modifiedOrders, new OrderEComparer())
@@ -141,10 +140,10 @@ public class AgentOrdersRepository : BaseRepository
     public void InsertAgentOrders(AgentOrdersE agentOrdersE)
     {
         var agent = agentOrdersE.Agent;
-        var orders = agentOrdersE.Orders;
+        var orders = agentOrdersE.Orders ?? new List<OrderE>();
 
         _agentsRepository.InsertAgent(agent);
-        
+
         var agentId = Convert.ToInt32(_agentsRepository.GetLastInsertId());
 
         foreach (var order in orders)

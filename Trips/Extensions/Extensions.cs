@@ -8,30 +8,21 @@ public static class Extensions
 {
     public static List<T> ToList<T>(this DataTable dataTable) where T : new()
     {
-        List<T> data = new();
-
-        foreach (DataRow row in dataTable.Rows)
-        {
-            var item = row.To<T>();
-            data.Add(item);
-        }
-
-        return data;
+        return (from DataRow row in dataTable.Rows select row.To<T>()).ToList();
     }
 
     public static T To<T>(this DataRow dataRow)
     {
-        var temp = typeof(T);
+        var type = typeof(T);
         var obj = Activator.CreateInstance<T>();
 
         foreach (DataColumn column in dataRow.Table.Columns)
-        foreach (var propertyInfo in temp.GetProperties())
+        foreach (var propertyInfo in type.GetProperties())
         {
             var attribute = propertyInfo.GetCustomAttribute<ColumnAttribute>(true);
 
-            if (attribute is null) continue;
-
-            if (attribute.Name.Equals(column.ColumnName, StringComparison.CurrentCultureIgnoreCase))
+            if (attribute?.Name != null &&
+                attribute.Name.Equals(column.ColumnName, StringComparison.CurrentCultureIgnoreCase))
                 propertyInfo.SetValue(obj, dataRow[column.ColumnName], null);
         }
 

@@ -14,8 +14,7 @@ public class AgentsRepository : BaseRepository
 
     public List<Agent> GetAgents()
     {
-        var query =
-            """ 
+        const string query = """ 
                 SELECT
                     agents.id,
                     agents.first_name,
@@ -29,7 +28,7 @@ public class AgentsRepository : BaseRepository
                 LEFT JOIN travel_agencies ON agents.fk_travel_agency = travel_agencies.id
                 """;
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
 
@@ -58,7 +57,7 @@ public class AgentsRepository : BaseRepository
                     agents.id = {{id}}
                 """;
 
-        using var connection = _dbContext.CreateConnection();
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
 
@@ -101,7 +100,7 @@ public class AgentsRepository : BaseRepository
         ExecuteNonQuery(query);
     }
 
-    public List<TravelAgency> GetTravelAgencies()
+    public IEnumerable<TravelAgency> GetTravelAgencies()
     {
         return Select("travel_agencies").ToList<TravelAgency>();
     }
@@ -115,14 +114,14 @@ public class AgentsRepository : BaseRepository
             FROM agents 
             WHERE first_name = '{agent.FirstName}' AND last_name = '{agent.LastName}' AND phone = '{agent.Phone}' AND email = '{agent.Email}' AND fk_travel_agency = '{agent.FkTravelAgencyId}'
             """;
-        
-        using var connection = _dbContext.CreateConnection();
+
+        using var connection = DbContext.CreateConnection();
         using var command = new MySqlCommand(query, connection);
         using var adapter = new MySqlDataAdapter(command);
-        
+
         var dataTable = new DataTable();
         adapter.Fill(dataTable);
-        
+
         return dataTable.Rows[0].Field<int>("id");
     }
 }

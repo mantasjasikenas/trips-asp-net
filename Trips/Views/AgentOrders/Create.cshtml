@@ -5,10 +5,8 @@
 }
 
 <div class="main-content-header">
-    <h3 class="title">@ViewData["title"]</h3>
-    <span class="actions">
-        @*<a href="@Url.Action("Create")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create new</a>*@
-    </span>
+    <h4 class="title">@ViewData["title"]</h4>
+    <br/>
 </div>
 
 <div class="main-content-ced">
@@ -16,8 +14,6 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-		@* add hidden form fields for non-visible properties, otherwise they will get lost in code that handles button presses *@
         @Html.HiddenFor(m => m.Agent.Id)
 
         <fieldset>
@@ -58,11 +54,11 @@
                 <legend style="width: unset; margin-bottom: 0;">Agent approved orders</legend>
             </div>
 
-            <div class="container-fluid d-flex d-row justify-content-start align-items-center">
+            <div class="container-fluid d-flex d-row justify-content-start align-items-center ps-0">
                 <button
                     formnovalidate
                     formaction="@Url.Action("AddNewOrder", new {id = Model.Agent.Id, returnTo = "Create"})"
-                    class="btn btn-outline-info">
+                    class="btn btn-outline-info btn-sm">
                     <i class="fa-solid fa-plus"></i> Add
                 </button>
             </div>
@@ -111,13 +107,7 @@
                             @Html.DropDownListFor(m => Model.Orders[i].LuggageSizeId, (IEnumerable<SelectListItem>) ViewData["luggageSizes"]!)
                             @Html.ValidationMessageFor(m => Model.Orders[i].LuggageSizeId, "")
                         </td>
-
-                        @*<td class="form-group">
-                            
-                            @#1#Html.DropDownListFor(m => Model.Orders[i].FkAgentId, (IEnumerable<SelectListItem>) ViewData["agents"]!)
-                            @Html.ValidationMessageFor(m => Model.Orders[i].FkAgentId, "")#1#
-                        </td>*@
-
+                        
                         <td class="form-group">
                             @Html.DropDownListFor(m => Model.Orders[i].FkCustomerId, (IEnumerable<SelectListItem>) ViewData["customers"]!)
                             @Html.ValidationMessageFor(m => Model.Orders[i].FkCustomerId, "")
@@ -130,7 +120,7 @@
 
                         <td>
                             <button
-                                formnovalidate @* ASP.NET Core magic to prevent client side validation *@
+                                formnovalidate
                                 formaction="@Url.Action("DeleteOrder", new {id = Model.Agent.Id, index = i, returnTo = "Create"})"
                                 class="btn btn-outline-danger btn-sm">
                                 <i class="fa-solid fa-trash"></i> Delete
@@ -143,19 +133,20 @@
         </fieldset>
 
 
-        <div class="container-fluid d-flex d-row justify-content-start">
+        <br/>
+        <div class="container-fluid d-flex d-row justify-content-start ps-0">
             <button
                 formnovalidate
                 formmethod="get"
                 formaction="@Url.Action("Index","Agent")"
-                class="btn btn-outline-danger">
+                class="btn btn-outline-danger btn-sm">
                 <i class="fa-solid fa-plus"></i> Cancel
             </button>
 
             <button
                 type="submit"
                 formaction="@Url.Action("Create")"
-                class="btn btn-outline-success">
+                class="btn btn-outline-success btn-sm">
                 <i class="fa-solid fa-plus"></i> Save
             </button>
         </div>

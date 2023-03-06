@@ -1,19 +1,15 @@
 ﻿@model Trips.Models.Agent
 
-@* this will also be used as page title in main layout *@
 @{
-    ViewData["title"] = "Modelio šalinimas";
+    ViewData["title"] = "Delete agent";
 }
 
 @* content header *@
 <div class="main-content-header">
-    <span class="title">@ViewData["title"]</span>
-    <span class="actions">
-        <a href="@Url.Action("Index")"
-           class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
-        </a>
-    </span>
+    <h4>@ViewData["title"]</h4>
+    <br/>
+    <p class="h6">Are you really want delete this model?</p>
+    <br/>
 </div>
 
 @* content itself *@
@@ -23,8 +19,6 @@
         @Html.AntiForgeryToken()
 
         <fieldset>
-            <legend class="confirm-msg">Ar tikrai norite šalinti šį modelį?</legend>
-
             <dl>
                 <dt>@Html.DisplayNameFor(m => m.Id)</dt>
                 <dd>@Html.DisplayFor(m => m.Id)</dd>
@@ -45,34 +39,26 @@
                 <dd>@Html.DisplayFor(m => m.FkTravelAgencyTitle)</dd>
             </dl>
 
-            @if (ViewData["deletionNotPermitted"] != null)
-            {
-                <div class="fail-msg">
-                    <i class="fa-solid fa-circle-exclamation"></i> Šio modelio pašalinti negalima, nes
-                    jis turi ryšių į priklausomas esybes.
+            <br/>
+            <div class="container-fluid d-flex d-row justify-content-start align-content-center ps-0">
+                <div>
+                    <a href="@Url.Action("Index")"
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="fa-solid fa-angles-left"></i>Cancel
+                    </a>
                 </div>
-            }
-            else
-            {
-                <div class="buttons">
-                    <button formaction="@Url.Action("DeleteConfirm", new {id = Model.Id})"
-                            class="btn btn-danger"
-                            style="white-space: nowrap;">
-                        <i class="fa-solid fa-trash"></i> Šalinti
-                    </button>
-                </div>
-            }
+
+                <button formaction="@Url.Action("DeleteConfirm", new {id = Model.Id})"
+                        class="btn btn-outline-danger btn-sm mt-0">
+                    <i class="fa-solid fa-trash"></i> Remove
+                </button>
+            </div>
+
         </fieldset>
     }
 </div>
 
 @* content footer *@
 <div class="main-content-footer">
-    <span class="title"></span>
-    <span class="actions">
-        <a href="@Url.Action("Index")"
-           class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
-        </a>
-    </span>
+
 </div>

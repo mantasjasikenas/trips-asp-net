@@ -7,14 +7,8 @@ namespace TripsAgency.Repositories;
 
 public class OrdersRepository : BaseRepository
 {
-    private readonly AgentsRepository _agentsRepository;
-    private readonly CustomersRepository _customersRepository;
-
-    public OrdersRepository(DbContext dbContext, AgentsRepository agentsRepository,
-        CustomersRepository customersRepository) : base(dbContext)
+    public OrdersRepository(DbContext dbContext) : base(dbContext)
     {
-        _agentsRepository = agentsRepository;
-        _customersRepository = customersRepository;
     }
 
     public IEnumerable<OrderE> GetOrders()
@@ -78,30 +72,5 @@ public class OrdersRepository : BaseRepository
     {
         var query = $"""DELETE FROM orders WHERE id = {id}""";
         ExecuteNonQuery(query);
-    }
-    
-    public IEnumerable<OrderStatus> GetOrderStatuses()
-    {
-        return Select("order_status").ToList<OrderStatus>();
-    }
-
-    public IEnumerable<LuggageSize> GetLuggageSizes()
-    {
-        return Select("size").ToList<LuggageSize>();
-    }
-
-    public IEnumerable<Agent> GetAgents()
-    {
-        return _agentsRepository.GetAgents();
-    }
-
-    public IEnumerable<Customer> GetCustomers()
-    {
-        return _customersRepository.GetCustomers();
-    }
-
-    public List<Trip> GetTrips()
-    {
-        return Select("trips").ToList<Trip>();
     }
 }

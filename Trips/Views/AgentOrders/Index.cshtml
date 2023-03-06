@@ -4,12 +4,17 @@
     ViewData["Title"] = "Agent approved orders";
 }
 
-<div class="main-content-header">
+<div class="container-fluid d-flex d-row justify-content-center">
     <h4 class="title">@ViewData["title"]</h4>
 </div>
 
-
 <div class="main-content-lst">
+    <br/>
+    <br/>
+    <div class="container-fluid d-flex d-row justify-content-center">
+        <h5>Agent details</h5>
+    </div>
+
     <table class="table entity-list" cellpadding="5" align="center">
         <thead>
         <tr>
@@ -55,12 +60,6 @@
             <td>
                 @Html.DisplayFor(model => Model.Agent.FkTravelAgencyTitle)
             </td>
-            <td>
-                @*<a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>*@
-            </td>
-            <td>
-                @*<a href="@Url.Action("Delete", new {id = Model.Agent.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>*@
-            </td>
         </tr>
 
         </tbody>
@@ -69,6 +68,11 @@
 </div>
 
 <div class="main-content-lst">
+    <br/>
+    <br/>
+    <div class="container-fluid d-flex d-row justify-content-center">
+        <h5>Orders details</h5>
+    </div>
     <table class="table entity-list" cellpadding="5" align="center">
         <thead>
         <tr>
@@ -98,7 +102,6 @@
             </th>
             <th>
                 @Html.DisplayName("Trip")
-
             </th>
 
 
@@ -135,23 +138,18 @@
                 <td>
                     @Html.DisplayFor(model => order.FkTripId)
                 </td>
-                @*<td>
-                    $1$<a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>#1#
-                </td>
-                <td>
-                    $1$<a href="@Url.Action("Delete", new {id = Model.Agent.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>#1#
-                </td>*@
             </tr>
         }
         </tbody>
     </table>
 </div>
 
-<div class="container-fluid d-flex d-row justify-content-end">
+<br/>
+<div class="container-fluid d-flex d-row justify-content-start ps-0">
     <span class="actions">
         <a href="@Url.Action("Index", "Agent")"
            class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Back to list
+            <i class="fa-solid fa-angles-left"></i> Back
         </a>
         <a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i>Edit</a>
     </span>
