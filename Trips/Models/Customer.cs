@@ -18,13 +18,13 @@ public class Customer {
 
     [DisplayName("Birth date")]
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+    //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
     [Required]
     public DateTime BirthDate { get; set; }
 
     [DisplayName("Phone number")]
     [Required]
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 
     [DisplayName("Email")]
     [EmailAddress]
@@ -43,5 +43,6 @@ public class Customer {
     [Required]
     public string PostalCode { get; set; }
 
+ 
 
 }
