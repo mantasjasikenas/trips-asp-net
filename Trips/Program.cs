@@ -13,7 +13,7 @@ builder.Logging
 
 
 builder.Services.AddTransient(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
+    new MySqlConnection(builder.Configuration["Trips:DbLocalConnection"]));
 
 var app = builder.Build();
 

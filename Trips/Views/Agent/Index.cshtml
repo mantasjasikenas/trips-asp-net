@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Trips.Models.Customer>;
+﻿@model IEnumerable<Trips.Models.Agent>;
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Customers";
+    ViewData["Title"] = "Agents";
 }
 
 <div class="main-content-header">
@@ -17,7 +17,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.PersonalCode)
+                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FirstName)
@@ -26,22 +26,13 @@
                     @Html.DisplayNameFor(model => model.LastName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BirthDate)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.PhoneNumber)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Street)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Town)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostalCode)
+                    @Html.DisplayNameFor(model => model.FkTravelAgency)
                 </th>
                 <th></th>
                 <th></th>
@@ -51,7 +42,7 @@
             @foreach (var customer in Model) {
                 <tr>
                     <td>
-                        @Html.DisplayFor(model => customer.PersonalCode)
+                        @Html.DisplayFor(model => customer.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(model => customer.FirstName)
@@ -60,28 +51,19 @@
                         @Html.DisplayFor(model => customer.LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => customer.BirthDate)
-                    </td>
-                    <td>
                         @Html.DisplayFor(model => customer.PhoneNumber)
                     </td>
                     <td>
                         @Html.DisplayFor(model => customer.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => customer.Street)
+                        @Html.DisplayFor(model => customer.FkTravelAgency)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => customer.Town)
+                        <a href="@Url.Action("Edit", new { id = customer.Id })" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
                     </td>
                     <td>
-                        @Html.DisplayFor(model => customer.PostalCode)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", new { id = customer.PersonalCode })" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Delete", new { id = customer.PersonalCode })" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>
+                        <a href="@Url.Action("Delete", new { id = customer.Id })" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>
                     </td>
                 </tr>
             }
