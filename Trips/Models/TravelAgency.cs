@@ -14,7 +14,7 @@ public class TravelAgency {
 
     [DisplayName("Phone number")]
     [Required]
-    public string PhoneNumber { get; set; }
+    public string Phone { get; set; }
 
 
     [DisplayName("Manager")]

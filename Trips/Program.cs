@@ -1,4 +1,6 @@
 using MySql.Data.MySqlClient;
+using TripsAgency.Database;
+using TripsAgency.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,11 @@ builder.Logging
     .AddEventSourceLogger();
 
 
-builder.Services.AddTransient(_ =>
-    new MySqlConnection(builder.Configuration["Trips:DbLocalConnection"]));
+
+
+
+builder.Services.AddSingleton<DbContext>();
+builder.Services.AddScoped<AgentsRepository>();
 
 var app = builder.Build();
 
