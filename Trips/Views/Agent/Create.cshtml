@@ -18,11 +18,11 @@
 
 @* content itself *@
 <div class="main-content-ced">
-    @using (Html.BeginForm(FormMethod.Post, new { @class = "entity-ce" }))
+    @using (Html.BeginForm(FormMethod.Post, new {@class = "entity-ce"}))
     {
         @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
         <fieldset>
             <div class="form-group">
@@ -49,11 +49,11 @@
                 @Html.ValidationMessageFor(m => m.Email, "")
             </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(m => m.FkTravelAgency)
-                @Html.DropDownListFor(m => m.FkTravelAgency, Enumerable.Empty, (string)ViewData["none-chosen"])
-                @Html.ValidationMessageFor(m => m.FkTravelAgency, "")
-            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(m => m.FkTravelAgencyId)
+                @Html.DropDownListFor(m => m.FkTravelAgencyId, (IList<SelectListItem>) ViewData["travelAgencies"])
+                @Html.ValidationMessageFor(m => m.FkTravelAgencyId, "")
+            </div>
 
         </fieldset>
 

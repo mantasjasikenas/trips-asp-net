@@ -60,4 +60,13 @@ public class BaseRepository
 
         return dataTable;
     }
+
+    public void ExecuteNonQuery(string query)
+    {
+        using var connection = _dbContext.CreateConnection();
+        using var command = new MySqlCommand(query, connection);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
 }

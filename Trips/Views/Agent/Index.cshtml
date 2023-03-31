@@ -32,7 +32,7 @@
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FkTravelAgency)
+                    @Html.DisplayNameFor(model => model.FkTravelAgencyTitle)
                 </th>
                 <th></th>
                 <th></th>
@@ -57,7 +57,7 @@
                         @Html.DisplayFor(model => customer.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => customer.FkTravelAgency)
+                        @Html.DisplayFor(model => customer.FkTravelAgencyTitle)
                     </td>
                     <td>
                         <a href="@Url.Action("Edit", new { id = customer.Id })" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>

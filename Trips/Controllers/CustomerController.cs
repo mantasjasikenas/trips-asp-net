@@ -1,55 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Trips.Models;
+using TripsAgency.Repositories;
 
-namespace Trips.Controllers;
+namespace TripsAgency.Controllers;
 
 [Controller]
 public class CustomerController : Controller
 {
-    private readonly MySqlConnection _mySqlConnection;
+    private readonly OrdersRepository _ordersRepository;
+    private readonly CustomersRepository _repository;
     private readonly ILogger<CustomerController> _logger;
 
-    public CustomerController(MySqlConnection mySqlConnection, ILogger<CustomerController> logger)
+    public CustomerController(OrdersRepository ordersRepository,CustomersRepository repository, ILogger<CustomerController> logger)
     {
-        _mySqlConnection = mySqlConnection;
+        _ordersRepository = ordersRepository;
+        _repository = repository;
         _logger = logger;
     }
-
-    // GET: CustomerController
+    
     [HttpGet]
     public ActionResult Index()
     {
-        List<Customer> customers = new();
-
-        try
-        {
-            _mySqlConnection.Open();
-            var query = @"SELECT * FROM `customers`";
-            using var command = new MySqlCommand(query, _mySqlConnection);
-            using var reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                customers.Add(new Customer
-                {
-                    PersonalCode = reader.GetInt32("personal_id"),
-                    FirstName = reader.GetString("first_name"),
-                    LastName = reader.GetString("last_name"),
-                    BirthDate = reader.GetDateTime("birth_date"),
-                    PhoneNumber = reader.GetString("phone"),
-                    Email = reader.GetString("email"),
-                    Street = reader.GetString("street"),
-                    Town = reader.GetString("town"),
-                    PostalCode = reader.GetString("postcode"),
-                });
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-        }
-
+        var customers = _repository.GetCustomers();
+        var orders = _ordersRepository.GetOrders();
 
         return View(customers);
     }

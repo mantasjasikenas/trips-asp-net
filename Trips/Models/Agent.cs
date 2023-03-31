@@ -32,8 +32,14 @@ public class Agent {
     public string Email { get; set; }
 
     [DisplayName("Travel agency")]
-    [Column("fk_travel_agency")]
+    [Column("fk_travel_agency_title")]
+    public string? FkTravelAgencyTitle { get; set; }
+    
+
+    [DisplayName("Travel agency")]
+    [Column("fk_travel_agency_id")]
     [Required]
-    public string FkTravelAgency { get; set; }
+    public int FkTravelAgencyId { get; set; }
+    
 
 }
