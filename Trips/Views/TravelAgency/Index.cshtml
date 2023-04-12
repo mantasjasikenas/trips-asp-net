@@ -15,70 +15,71 @@
 <div class="main-content-lst">
     <table class="table entity-list" cellpadding="5" align="center">
         <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Manager)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Street)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Town)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Town)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(model => customer.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Manager)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Street)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Town)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.PostCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Country)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", new { id = customer.Id })" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Delete", new { id = customer.Id })" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>
-                    </td>
-                </tr>
-            }
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => customer.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Manager)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Town)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.PostCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => customer.Country)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new {id = customer.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", new {id = customer.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

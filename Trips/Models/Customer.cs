@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trips.Models;
-public class Customer {
 
+public class Customer
+{
     [DisplayName("Personal code")]
     [Column("personal_id")]
     [Required]
@@ -52,7 +53,4 @@ public class Customer {
     [Column("postcode")]
     [Required]
     public string PostalCode { get; set; }
-
- 
-
 }

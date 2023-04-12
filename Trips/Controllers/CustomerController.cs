@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using Trips.Models;
 using TripsAgency.Repositories;
 
 namespace TripsAgency.Controllers;
@@ -8,17 +6,18 @@ namespace TripsAgency.Controllers;
 [Controller]
 public class CustomerController : Controller
 {
+    private readonly ILogger<CustomerController> _logger;
     private readonly OrdersRepository _ordersRepository;
     private readonly CustomersRepository _repository;
-    private readonly ILogger<CustomerController> _logger;
 
-    public CustomerController(OrdersRepository ordersRepository,CustomersRepository repository, ILogger<CustomerController> logger)
+    public CustomerController(OrdersRepository ordersRepository, CustomersRepository repository,
+        ILogger<CustomerController> logger)
     {
         _ordersRepository = ordersRepository;
         _repository = repository;
         _logger = logger;
     }
-    
+
     [HttpGet]
     public ActionResult Index()
     {

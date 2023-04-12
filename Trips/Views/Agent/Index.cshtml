@@ -4,10 +4,16 @@
     ViewData["Title"] = "Agents";
 }
 
+
+<div class="container-fluid d-flex d-row justify-content-center">
+    <h3>@ViewData["title"]</h3>
+</div>
+
 <div class="main-content-header">
-    <span class="title">@ViewData["title"]</span>
+
     <span class="actions">
-        <a href="@Url.Action("Create")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create new</a>
+        <a href="@Url.Action("Create")" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i> Create new agent</a>
+        <a href="@Url.Action("Create", "AgentOrders")" class="btn btn-outline-info btn-sm"><i class="fa-solid fa-plus"></i> Create new agent orders</a>
     </span>
 </div>
 
@@ -15,58 +21,63 @@
 <div class="main-content-lst">
     <table class="table entity-list" cellpadding="5" align="center">
         <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FkTravelAgencyTitle)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkTravelAgencyTitle)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(model => customer.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => customer.FkTravelAgencyTitle)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", new { id = customer.Id })" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Delete", new { id = customer.Id })" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>
-                    </td>
-                </tr>
-            }
+        @foreach (var agent in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => agent.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => agent.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => agent.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => agent.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => agent.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => agent.FkTravelAgencyTitle)
+                </td>
+                <td>
+                    <a href="@Url.Action("Index", "AgentOrders", new {id = agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Orders</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new {id = agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", new {id = agent.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

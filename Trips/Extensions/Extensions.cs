@@ -12,30 +12,27 @@ public static class Extensions
 
         foreach (DataRow row in dataTable.Rows)
         {
-            T item = row.To<T>();
+            var item = row.To<T>();
             data.Add(item);
         }
 
         return data;
     }
-   
+
     public static T To<T>(this DataRow dataRow)
     {
-        Type temp = typeof(T);
-        T obj = Activator.CreateInstance<T>();
+        var temp = typeof(T);
+        var obj = Activator.CreateInstance<T>();
 
         foreach (DataColumn column in dataRow.Table.Columns)
+        foreach (var propertyInfo in temp.GetProperties())
         {
-            foreach (PropertyInfo propertyInfo in temp.GetProperties())
-            {
-                var attribute = propertyInfo.GetCustomAttribute<ColumnAttribute>(true);
+            var attribute = propertyInfo.GetCustomAttribute<ColumnAttribute>(true);
 
-                if (attribute is not null)
-                {
-                    if (attribute.Name.Equals(column.ColumnName, StringComparison.CurrentCultureIgnoreCase))
-                        propertyInfo.SetValue(obj, dataRow[column.ColumnName], null);
-                }
-            }
+            if (attribute is null) continue;
+
+            if (attribute.Name.Equals(column.ColumnName, StringComparison.CurrentCultureIgnoreCase))
+                propertyInfo.SetValue(obj, dataRow[column.ColumnName], null);
         }
 
         return obj;

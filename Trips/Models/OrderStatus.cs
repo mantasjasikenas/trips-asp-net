@@ -10,7 +10,7 @@ public class OrderStatus
     [Column("id")]
     [Required]
     public int Id { get; set; }
-    
+
     [DisplayName("Status")]
     [Column("name")]
     [Required]

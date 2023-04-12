@@ -10,7 +10,7 @@ public class LuggageSize
     [Column("id")]
     [Required]
     public int Id { get; set; }
-    
+
     [DisplayName("Size")]
     [Column("name")]
     [Required]

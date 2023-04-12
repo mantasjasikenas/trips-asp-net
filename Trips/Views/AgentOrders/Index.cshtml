@@ -1,0 +1,158 @@
+﻿@model Trips.Models.AgentOrdersL;
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Agent approved orders";
+}
+
+<div class="main-content-header">
+    <h4 class="title">@ViewData["title"]</h4>
+</div>
+
+
+<div class="main-content-lst">
+    <table class="table entity-list" cellpadding="5" align="center">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agent.FkTravelAgencyTitle)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Agent.FkTravelAgencyTitle)
+            </td>
+            <td>
+                @*<a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>*@
+            </td>
+            <td>
+                @*<a href="@Url.Action("Delete", new {id = Model.Agent.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>*@
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+<div class="main-content-lst">
+    <table class="table entity-list" cellpadding="5" align="center">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Id")
+            </th>
+            <th>
+                @Html.DisplayName("Adults Count")
+            </th>
+            <th>
+                @Html.DisplayName("Children Count")
+            </th>
+            <th>
+                @Html.DisplayName("Final Price")
+            </th>
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+            <th>
+                @Html.DisplayName("Luggage Size")
+            </th>
+            <th>
+                @Html.DisplayName("Agent")
+            </th>
+            <th>
+                @Html.DisplayName("Customer")
+            </th>
+            <th>
+                @Html.DisplayName("Trip")
+
+            </th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => order.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.AdultsCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.ChildrenCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.FinalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.LuggageSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.FkAgent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.FkCustomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => order.FkTripId)
+                </td>
+                @*<td>
+                    $1$<a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>#1#
+                </td>
+                <td>
+                    $1$<a href="@Url.Action("Delete", new {id = Model.Agent.Id})" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> Šalinti</a>#1#
+                </td>*@
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="container-fluid d-flex d-row justify-content-end">
+    <span class="actions">
+        <a href="@Url.Action("Index", "Agent")"
+           class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-angles-left"></i> Back to list
+        </a>
+        <a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i>Edit</a>
+    </span>
+</div>

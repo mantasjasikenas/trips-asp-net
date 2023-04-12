@@ -7,13 +7,7 @@
 
 @* content header *@
 <div class="main-content-header">
-    <span class="title">@ViewData["title"]</span>
-    <span class="actions">
-        <a href="@Url.Action("Index")"
-           class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
-        </a>
-    </span>
+    <h4 class="title">@ViewData["title"]</h4>
 </div>
 
 @* content itself *@
@@ -57,8 +51,15 @@
 
         </fieldset>
 
-        <div class="container-fluid d-flex d-row justify-content-end">
-            <button name="save" value="1" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Išsaugoti</button>
+        <div class="container-fluid d-flex d-row justify-content-end align-content-center">
+            <span class="actions">
+                <a href="@Url.Action("Index")"
+                   class="btn btn-outline-danger btn-sm">
+                    <i class="fa-solid fa-angles-left"></i> Cancel
+                </a>
+                <button name="save" value="1" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+            </span>
+            
         </div>
     }
 </div>
@@ -66,10 +67,10 @@
 @* content footer *@
 <div class="main-content-footer">
     <span class="title"></span>
-    <span class="actions">
+    @*<span class="actions">
         <a href="@Url.Action("Index")"
            class="btn btn-outline-primary btn-sm">
-            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+            <i class="fa-solid fa-angles-left"></i> Cancel
         </a>
-    </span>
+    </span>*@
 </div>

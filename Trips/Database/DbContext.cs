@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace TripsAgency.Database;
 
@@ -13,6 +12,9 @@ public class DbContext
         _configuration = configuration;
         _connectionString = _configuration["Trips:AwsDbRemoteConnection"]!;
     }
+
     public MySqlConnection CreateConnection()
-        => new(_connectionString);
+    {
+        return new MySqlConnection(_connectionString);
+    }
 }

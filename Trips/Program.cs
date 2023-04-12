@@ -1,4 +1,3 @@
-using MySql.Data.MySqlClient;
 using TripsAgency.Database;
 using TripsAgency.Repositories;
 
@@ -7,25 +6,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc().WithRazorPagesRoot("/Views");
 builder.Logging
-    .ClearProviders()
-    .AddConfiguration(builder.Configuration.GetSection("Logging"))
-    .AddConsole()
-    .AddDebug()
-    .AddEventSourceLogger();
-
-
-
+       .ClearProviders()
+       .AddConfiguration(builder.Configuration.GetSection("Logging"))
+       .AddConsole()
+       .AddDebug()
+       .AddEventSourceLogger();
 
 
 builder.Services.AddSingleton<DbContext>();
 builder.Services.AddScoped<AgentsRepository>();
 builder.Services.AddScoped<CustomersRepository>();
 builder.Services.AddScoped<OrdersRepository>();
+builder.Services.AddScoped<AgentOrdersRepository>();
 
 var app = builder.Build();
 
 
-if (!app.Environment.IsDevelopment()) {
+if (!app.Environment.IsDevelopment())
+{
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }

@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
 using Trips.Models;
-using TripsAgency.Controllers;
-using TripsAgency.Database;
 using TripsAgency.Repositories;
 
 namespace Trips.Controllers;

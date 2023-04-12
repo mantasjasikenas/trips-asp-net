@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Trips.Models; 
-public class TravelAgency {
+namespace Trips.Models;
 
+public class TravelAgency
+{
     [DisplayName("Id")]
     [Column("id")]
     [Required]
@@ -45,5 +46,4 @@ public class TravelAgency {
     [Column("country")]
     [Required]
     public string Country { get; set; }
-
 }

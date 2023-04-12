@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trips.Models;
-public class Agent {
 
+public class Agent
+{
     [DisplayName("Id")]
     [Column("id")]
     [Required]
@@ -34,12 +35,10 @@ public class Agent {
     [DisplayName("Travel agency")]
     [Column("fk_travel_agency_title")]
     public string? FkTravelAgencyTitle { get; set; }
-    
+
 
     [DisplayName("Travel agency")]
     [Column("fk_travel_agency_id")]
     [Required]
     public int FkTravelAgencyId { get; set; }
-    
-
 }

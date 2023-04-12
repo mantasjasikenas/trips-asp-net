@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using Trips.Controllers;
 using Trips.Models;
-using TripsAgency.Database;
-using TripsAgency.Extensions;
 
 namespace TripsAgency.Controllers;
+
 public class TravelAgencyController : Controller
 {
     private readonly ILogger<CustomerController> _logger;
@@ -23,9 +20,9 @@ public class TravelAgencyController : Controller
 
         try
         {
-           /* agencies = _db
-                    .Select("travel_agencies")
-                    .ToList<TravelAgency>();*/
+            /* agencies = _db
+                     .Select("travel_agencies")
+                     .ToList<TravelAgency>();*/
         }
         catch (Exception ex)
         {
@@ -35,5 +32,4 @@ public class TravelAgencyController : Controller
 
         return View(agencies);
     }
-
 }

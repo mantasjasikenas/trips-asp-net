@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System.Data;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 using Trips.Models;
 using TripsAgency.Database;
 using TripsAgency.Extensions;
@@ -104,5 +104,25 @@ public class AgentsRepository : BaseRepository
     public List<TravelAgency> GetTravelAgencies()
     {
         return Select("travel_agencies").ToList<TravelAgency>();
+    }
+
+
+    public int GetAgentId(Agent agent)
+    {
+        var query =
+            $"""
+            SELECT id 
+            FROM agents 
+            WHERE first_name = '{agent.FirstName}' AND last_name = '{agent.LastName}' AND phone = '{agent.Phone}' AND email = '{agent.Email}' AND fk_travel_agency = '{agent.FkTravelAgencyId}'
+            """;
+        
+        using var connection = _dbContext.CreateConnection();
+        using var command = new MySqlCommand(query, connection);
+        using var adapter = new MySqlDataAdapter(command);
+        
+        var dataTable = new DataTable();
+        adapter.Fill(dataTable);
+        
+        return dataTable.Rows[0].Field<int>("id");
     }
 }
