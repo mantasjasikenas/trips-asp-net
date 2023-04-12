@@ -17,4 +17,10 @@
         <PackageReference Include="MySql.Data" Version="8.0.32" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\README.md">
+        <Link>README.md</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
