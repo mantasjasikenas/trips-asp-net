@@ -68,7 +68,7 @@ public class AgentOrdersController : Controller
 
         _agentOrdersRepository.InsertAgentOrders(agentOrdersE);
 
-        return RedirectToAction("Index", new {id = agentOrdersE.Agent.Id});
+        return RedirectToAction("Index", new { id = agentOrdersE.Agent.Id });
     }
 
     [HttpGet]
@@ -93,13 +93,19 @@ public class AgentOrdersController : Controller
 
         _agentOrdersRepository.UpdateAgentOrders(agentOrdersE);
 
-        return RedirectToAction("Index", new {id});
+        return RedirectToAction("Index", new { id });
     }
 
     [HttpGet]
     public ActionResult ResetEdit(int id)
     {
-        return RedirectToAction("Edit", new {id});
+        return RedirectToAction("Edit", new { id });
+    }
+
+    [HttpGet]
+    public ActionResult CancelEdit(int id)
+    {
+        return RedirectToAction("Index", new { id });
     }
 
     [HttpPost]
@@ -107,7 +113,7 @@ public class AgentOrdersController : Controller
     public ActionResult AddNewOrderEdit(int id, AgentOrdersE agentOrdersE)
     {
         ModelState.Clear();
-        
+
         agentOrdersE.Orders ??= new List<OrderE>();
         agentOrdersE.Orders.Add(new OrderE
         {
@@ -125,7 +131,7 @@ public class AgentOrdersController : Controller
     public ActionResult AddNewOrderCreate(AgentOrdersE agentOrdersE)
     {
         ModelState.Clear();
-        
+
         agentOrdersE.Orders ??= new List<OrderE>();
         agentOrdersE.Orders.Add(new OrderE
         {
