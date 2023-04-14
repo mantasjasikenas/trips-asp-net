@@ -73,4 +73,10 @@ public class OrdersRepository : BaseRepository
         var query = $"""DELETE FROM orders WHERE id = {id}""";
         ExecuteNonQuery(query);
     }
+    
+    public void DeleteAgentOrders(int agentId)
+    {
+        var query = $"""DELETE FROM orders WHERE fk_agent = {agentId}""";
+        ExecuteNonQuery(query);
+    }
 }

@@ -172,4 +172,10 @@ public class AgentOrdersRepository : BaseRepository
     {
         return Select("trips").ToList<Trip>();
     }
+    
+    public void DeleteAgentOrders(int agentId)
+    {
+        var query = $"""DELETE FROM orders WHERE fk_agent = {agentId}""";
+        ExecuteNonQuery(query);
+    }
 }

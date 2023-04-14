@@ -8,7 +8,10 @@
 <div class="main-content-header">
     <h4>@ViewData["title"]</h4>
     <br/>
-    <p class="h6">Are you really want delete this model?</p>
+    <h5 class="text-danger ps-0">@ViewData["deletionError"]</h5>
+    <br/>
+    <p class="h5">Are you really want delete agent?</p>
+    <p>Associated orders will be deleted.</p>
     <br/>
 </div>
 

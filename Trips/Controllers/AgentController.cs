@@ -9,11 +9,13 @@ namespace Trips.Controllers;
 public class AgentController : Controller
 {
     private readonly AgentsRepository _agentsRepository;
+    private readonly OrdersRepository _ordersRepository;
     private readonly ILogger<AgentController> _logger;
 
-    public AgentController(AgentsRepository agentsRepository, ILogger<AgentController> logger)
+    public AgentController(AgentsRepository agentsRepository, OrdersRepository ordersRepository, ILogger<AgentController> logger)
     {
         _agentsRepository = agentsRepository;
+        _ordersRepository = ordersRepository;
         _logger = logger;
     }
 
@@ -100,15 +102,17 @@ public class AgentController : Controller
     {
         try
         {
+            _ordersRepository.DeleteAgentOrders(id);
             _agentsRepository.DeleteAgent(id);
 
             return RedirectToAction("Index");
         }
-        catch (MySqlException)
+        catch (MySqlException ex)
         {
-            ViewData["deletionNotPermitted"] = true;
+            _logger.LogError(ex.Message);
+            ViewData["deletionError"] = "Cannot delete agent with orders because of foreign key constraint.";
 
-            var agent = new Agent();
+            var agent = _agentsRepository.GetAgent(id);
 
             return View("Delete", agent);
         }

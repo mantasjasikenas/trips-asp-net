@@ -23,4 +23,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Customer\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TravelAgency\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

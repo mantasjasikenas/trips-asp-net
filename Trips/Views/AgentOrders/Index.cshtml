@@ -145,12 +145,28 @@
 </div>
 
 <br/>
-<div class="container-fluid d-flex d-row justify-content-start ps-0">
-    <span class="actions">
+<div class="container-fluid d-flex d-row justify-content-between ps-0">
+
+    <div>
         <a href="@Url.Action("Index", "Agent")"
            class="btn btn-outline-primary btn-sm">
             <i class="fa-solid fa-angles-left"></i> Back
         </a>
-        <a href="@Url.Action("Edit", new {id = Model.Agent.Id})" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i>Edit</a>
-    </span>
+        <a href="@Url.Action("Edit", new {id = Model.Agent.Id})"
+           class="btn btn-outline-success btn-sm">
+            <i class="fa-solid fa-plus"></i>Edit
+        </a>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Delete", "Agent", new {id = Model.Agent.Id})"
+           class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-plus"></i>Delete agent
+        </a>
+        <a href="@Url.Action("DeleteOrders", new {id = Model.Agent.Id})"
+           class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-plus"></i>Delete orders
+        </a>
+    </div>
+
 </div>

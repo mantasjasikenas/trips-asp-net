@@ -153,6 +153,15 @@ public class AgentOrdersController : Controller
 
         return View(returnTo, agentOrdersE);
     }
+    
+    [HttpGet]
+    [Route("AgentOrders/{id:int}/DeleteOrders")]
+    public ActionResult DeleteOrders(int id)
+    {
+        _agentOrdersRepository.DeleteAgentOrders(id);
+
+        return RedirectToAction("Index", new { id });
+    }
 
 
     private void PopulateSelections()

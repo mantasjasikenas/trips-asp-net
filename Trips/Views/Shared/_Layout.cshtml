@@ -19,18 +19,15 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
-                    </li>
                     @*<li class="nav-item">
-                        <a class="nav-link text-light" href="@Url.Action("Index", "Customer")">Customers</a>
+                        <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
                     </li>*@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="@Url.Action("Index", "Agent")">Agents</a>
                     </li>
-                    @*                        <li class="nav-item">
-                            <a class="nav-link text-light" href="@Url.Action("Index", "TravelAgency")">Travel agency</a>
-                        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -44,7 +41,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2023 - Trips - Mantas Jasikėnas IFF-1/4 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        &copy; 2023 - Trips Agency - Mantas Jasikėnas IFF-1/4 
     </div>
 </footer>
 
