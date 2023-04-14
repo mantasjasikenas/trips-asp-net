@@ -39,6 +39,6 @@ public class Agent
 
     [DisplayName("Travel agency")]
     [Column("fk_travel_agency_id")]
-    [Required]
-    public int FkTravelAgencyId { get; set; }
+    [Required(ErrorMessage = "The Travel agency field is required.")]
+    public int? FkTravelAgencyId { get; set; }
 }

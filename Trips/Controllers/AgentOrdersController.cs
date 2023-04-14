@@ -104,17 +104,38 @@ public class AgentOrdersController : Controller
 
     [HttpPost]
     [Route("AgentOrders/Edit/{id:int}/AddNewOrder")]
-    public ActionResult AddNewOrder(int id, AgentOrdersE agentOrdersE, string returnTo)
+    public ActionResult AddNewOrderEdit(int id, AgentOrdersE agentOrdersE)
     {
+        ModelState.Clear();
+        
         agentOrdersE.Orders ??= new List<OrderE>();
-
         agentOrdersE.Orders.Add(new OrderE
         {
             FkAgentId = agentOrdersE.Agent.Id
         });
+
+
         PopulateSelections();
 
-        return View(returnTo, agentOrdersE);
+        return View("Edit", agentOrdersE);
+    }
+
+    [HttpPost]
+    [Route("AgentOrders/Create/AddNewOrder")]
+    public ActionResult AddNewOrderCreate(AgentOrdersE agentOrdersE)
+    {
+        ModelState.Clear();
+        
+        agentOrdersE.Orders ??= new List<OrderE>();
+        agentOrdersE.Orders.Add(new OrderE
+        {
+            FkAgentId = agentOrdersE.Agent.Id
+        });
+
+
+        PopulateSelections();
+
+        return View("Create", agentOrdersE);
     }
 
     [HttpPost]

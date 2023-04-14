@@ -1,4 +1,5 @@
-﻿@model Trips.Models.AgentOrdersE;
+﻿@using Microsoft.AspNetCore.Mvc.RazorPages
+@model Trips.Models.AgentOrdersE;
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Create agent orders";
@@ -43,21 +44,21 @@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Agent.FkTravelAgencyId)
-                @Html.DropDownListFor(m => m.Agent.FkTravelAgencyId, (IEnumerable<SelectListItem>) ViewData["travelAgencies"]!)
+                @Html.DropDownListFor(m => m.Agent.FkTravelAgencyId, (IEnumerable<SelectListItem>) ViewData["travelAgencies"]!, "")
                 @Html.ValidationMessageFor(m => m.Agent.FkTravelAgencyId, "")
             </div>
 
         </fieldset>
 
         <fieldset>
+            <br/>
             <div class="container-fluid d-flex d-row justify-content-around align-items-center">
                 <legend style="width: unset; margin-bottom: 0;">Agent approved orders</legend>
             </div>
 
             <div class="container-fluid d-flex d-row justify-content-start align-items-center ps-0">
                 <button
-                    formnovalidate
-                    formaction="@Url.Action("AddNewOrder", new {id = Model.Agent.Id, returnTo = "Create"})"
+                    formaction="@Url.Action("AddNewOrderCreate")"
                     class="btn btn-outline-info btn-sm">
                     <i class="fa-solid fa-plus"></i> Add
                 </button>
@@ -68,7 +69,7 @@
                 <tr>
                     <th>Adults count</th>
                     <th>Children count</th>
-                    <th>Final price</th>
+                    <th>Total price</th>
                     <th>Order status</th>
                     <th>Luggage size</th>
                     @*<th>Agent</th>*@
@@ -99,22 +100,22 @@
                         </td>
 
                         <td class="form-group">
-                            @Html.DropDownListFor(m => Model.Orders[i].StatusId, (IEnumerable<SelectListItem>) ViewData["statuses"]!)
+                            @Html.DropDownListFor(m => Model.Orders[i].StatusId, (IEnumerable<SelectListItem>) ViewData["statuses"]!, "")
                             @Html.ValidationMessageFor(m => Model.Orders[i].StatusId, "")
                         </td>
 
                         <td class="form-group">
-                            @Html.DropDownListFor(m => Model.Orders[i].LuggageSizeId, (IEnumerable<SelectListItem>) ViewData["luggageSizes"]!)
+                            @Html.DropDownListFor(m => Model.Orders[i].LuggageSizeId, (IEnumerable<SelectListItem>) ViewData["luggageSizes"]!, "")
                             @Html.ValidationMessageFor(m => Model.Orders[i].LuggageSizeId, "")
                         </td>
-                        
+
                         <td class="form-group">
-                            @Html.DropDownListFor(m => Model.Orders[i].FkCustomerId, (IEnumerable<SelectListItem>) ViewData["customers"]!)
+                            @Html.DropDownListFor(m => Model.Orders[i].FkCustomerId, (IEnumerable<SelectListItem>) ViewData["customers"]!, "")
                             @Html.ValidationMessageFor(m => Model.Orders[i].FkCustomerId, "")
                         </td>
 
                         <td class="form-group">
-                            @Html.DropDownListFor(m => Model.Orders[i].FkTripId, (IEnumerable<SelectListItem>) ViewData["trips"]!)
+                            @Html.DropDownListFor(m => Model.Orders[i].FkTripId, (IEnumerable<SelectListItem>) ViewData["trips"]!, "")
                             @Html.ValidationMessageFor(m => Model.Orders[i].FkTripId, "")
                         </td>
 

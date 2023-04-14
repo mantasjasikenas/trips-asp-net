@@ -24,7 +24,7 @@ public class OrdersRepository : BaseRepository
             SET
                 adults_count = '{orderE.AdultsCount}',
                 children_count = '{orderE.ChildrenCount}',
-                final_price = '{orderE.FinalPrice.ToString("F", CultureInfo.InvariantCulture)}',
+                final_price = '{orderE.FinalPrice?.ToString("F", CultureInfo.InvariantCulture)}',
                 status = '{orderE.StatusId}',
                 luggage_size = '{orderE.LuggageSizeId}',
                 fk_agent = '{orderE.FkAgentId}',
@@ -56,7 +56,7 @@ public class OrdersRepository : BaseRepository
             (
                 '{orderE.AdultsCount}',
                 '{orderE.ChildrenCount}',
-                '{orderE.FinalPrice.ToString("F", CultureInfo.InvariantCulture)}',
+                '{orderE.FinalPrice?.ToString("F", CultureInfo.InvariantCulture)}',
                 '{orderE.StatusId}',
                 '{orderE.LuggageSizeId}',
                 '{orderE.FkAgentId}',
