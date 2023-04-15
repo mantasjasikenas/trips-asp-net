@@ -26,7 +26,6 @@ builder.Logging
 
 builder.Services.AddSingleton<DbContext>();
 builder.Services.AddScoped<AgentsRepository>();
-builder.Services.AddScoped<CustomersRepository>();
 builder.Services.AddScoped<OrdersRepository>();
 builder.Services.AddScoped<AgentOrdersRepository>();
 

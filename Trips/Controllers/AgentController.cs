@@ -102,7 +102,7 @@ public class AgentController : Controller
     {
         try
         {
-            _ordersRepository.DeleteAgentOrders(id);
+            _ordersRepository.CascadeDeleteAgentOrders(id);
             _agentsRepository.DeleteAgent(id);
 
             return RedirectToAction("Index");

@@ -68,15 +68,40 @@ public class OrdersRepository : BaseRepository
         ExecuteNonQuery(query);
     }
 
-    public void DeleteOrder(int id)
+    public void CascadeDeleteOrder(int orderId)
     {
-        var query = $"""DELETE FROM orders WHERE id = {id}""";
+        var query = $"""
+            DELETE FROM payments
+            WHERE fk_bill IN (
+                SELECT bills.nr FROM bills WHERE fk_order = {orderId}
+            );
+            
+            DELETE FROM bills WHERE fk_order = {orderId};
+
+            DELETE FROM orders WHERE id = {orderId};
+            """;
+
         ExecuteNonQuery(query);
     }
-    
-    public void DeleteAgentOrders(int agentId)
+
+    public void CascadeDeleteAgentOrders(int agentId)
     {
-        var query = $"""DELETE FROM orders WHERE fk_agent = {agentId}""";
+        var query = $"""
+            DELETE FROM payments
+            WHERE fk_bill IN (
+                SELECT bills.nr FROM bills WHERE fk_order IN (
+                    SELECT orders.id FROM orders WHERE fk_agent = {agentId}
+                )
+            );
+            
+            DELETE FROM bills WHERE fk_order IN (
+                SELECT orders.id FROM orders WHERE fk_agent = {agentId}
+            );
+
+            DELETE FROM orders WHERE fk_agent = {agentId};
+            """;
+
+
         ExecuteNonQuery(query);
     }
 }

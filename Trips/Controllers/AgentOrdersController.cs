@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MySql.Data.MySqlClient;
 using Trips.Models;
 using TripsAgency.Repositories;
 
@@ -9,14 +10,17 @@ public class AgentOrdersController : Controller
 {
     private readonly AgentOrdersRepository _agentOrdersRepository;
     private readonly AgentsRepository _agentsRepository;
+    private readonly OrdersRepository _ordersRepository;
     private readonly ILogger<AgentOrdersController> _logger;
 
     public AgentOrdersController(AgentOrdersRepository agentOrdersRepository,
         AgentsRepository agentsRepository,
+        OrdersRepository ordersRepository,
         ILogger<AgentOrdersController> logger)
     {
         _agentOrdersRepository = agentOrdersRepository;
         _agentsRepository = agentsRepository;
+        _ordersRepository = ordersRepository;
         _logger = logger;
     }
 
@@ -68,7 +72,7 @@ public class AgentOrdersController : Controller
 
         _agentOrdersRepository.InsertAgentOrders(agentOrdersE);
 
-        return RedirectToAction("Index", new { id = agentOrdersE.Agent.Id });
+        return RedirectToAction("Index", new {id = agentOrdersE.Agent.Id});
     }
 
     [HttpGet]
@@ -93,19 +97,25 @@ public class AgentOrdersController : Controller
 
         _agentOrdersRepository.UpdateAgentOrders(agentOrdersE);
 
-        return RedirectToAction("Index", new { id });
+        return RedirectToAction("Index", new {id});
     }
 
     [HttpGet]
     public ActionResult ResetEdit(int id)
     {
-        return RedirectToAction("Edit", new { id });
+        return RedirectToAction("Edit", new {id});
     }
 
     [HttpGet]
     public ActionResult CancelEdit(int id)
     {
-        return RedirectToAction("Index", new { id });
+        return RedirectToAction("Index", new {id});
+    }
+
+    [HttpGet]
+    public ActionResult CancelCreate()
+    {
+        return RedirectToAction("Index", "Agent");
     }
 
     [HttpPost]
@@ -153,14 +163,42 @@ public class AgentOrdersController : Controller
 
         return View(returnTo, agentOrdersE);
     }
-    
+
     [HttpGet]
     [Route("AgentOrders/{id:int}/DeleteOrders")]
     public ActionResult DeleteOrders(int id)
     {
-        _agentOrdersRepository.DeleteAgentOrders(id);
+        _ordersRepository.CascadeDeleteAgentOrders(id);
 
-        return RedirectToAction("Index", new { id });
+        return RedirectToAction("Index", new {id});
+    }
+
+    [HttpPost]
+    public ActionResult DeleteConfirm(int id)
+    {
+        try
+        {
+            _ordersRepository.CascadeDeleteAgentOrders(id);
+            return RedirectToAction("Index", new {id});
+        }
+        catch (MySqlException ex)
+        {
+            _logger.LogError(ex.Message);
+            ViewData["deletionError"] = "Cannot delete agent with orders because of foreign key constraint.";
+
+            var orders = _agentOrdersRepository.GetAgentOrders(id);
+
+            return View("Delete", orders);
+        }
+    }
+
+    [HttpGet]
+    [Route("AgentOrders/Delete/{id:int}")]
+    public ActionResult Delete(int id)
+    {
+        var orders = _agentOrdersRepository.GetAgentOrders(id);
+
+        return View(orders);
     }
 
 
