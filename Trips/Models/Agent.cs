@@ -23,6 +23,7 @@ public class Agent
 
     [DisplayName("Phone number")]
     [Column("phone")]
+    [Phone]
     [Required]
     public string Phone { get; set; }
 

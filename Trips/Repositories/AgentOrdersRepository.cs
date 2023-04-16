@@ -134,7 +134,7 @@ public class AgentOrdersRepository : BaseRepository
         }
     }
 
-    public void InsertAgentOrders(AgentOrdersE agentOrdersE)
+    public int InsertAgentOrders(AgentOrdersE agentOrdersE)
     {
         var agent = agentOrdersE.Agent;
         var orders = agentOrdersE.Orders ?? new List<OrderE>();
@@ -148,6 +148,8 @@ public class AgentOrdersRepository : BaseRepository
             order.FkAgentId = agentId;
             _ordersRepository.InsertOrder(order);
         }
+        
+        return agentId;
     }
 
     public IEnumerable<OrderStatus> GetOrderStatuses()

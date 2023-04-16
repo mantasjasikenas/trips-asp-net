@@ -70,9 +70,9 @@ public class AgentOrdersController : Controller
             return View(agentOrdersE);
         }
 
-        _agentOrdersRepository.InsertAgentOrders(agentOrdersE);
+        var newAgentid = _agentOrdersRepository.InsertAgentOrders(agentOrdersE);
 
-        return RedirectToAction("Index", new {id = agentOrdersE.Agent.Id});
+        return RedirectToAction("Index", new {id = newAgentid});
     }
 
     [HttpGet]
