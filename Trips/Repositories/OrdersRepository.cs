@@ -7,7 +7,7 @@ namespace TripsAgency.Repositories;
 
 public class OrdersRepository : BaseRepository
 {
-    public OrdersRepository(DbContext dbContext) : base(dbContext)
+    public OrdersRepository(IDbContext dbContext) : base(dbContext)
     {
     }
 

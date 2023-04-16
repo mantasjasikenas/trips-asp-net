@@ -6,9 +6,9 @@ namespace TripsAgency.Database;
 
 public class BaseRepository
 {
-    protected readonly DbContext DbContext;
+    protected readonly IDbContext DbContext;
 
-    protected BaseRepository(DbContext dbContext)
+    protected BaseRepository(IDbContext dbContext)
     {
         DbContext = dbContext;
     }

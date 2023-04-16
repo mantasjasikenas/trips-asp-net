@@ -11,7 +11,7 @@ public class AgentOrdersRepository : BaseRepository
     private readonly AgentsRepository _agentsRepository;
     private readonly OrdersRepository _ordersRepository;
 
-    public AgentOrdersRepository(DbContext dbContext, AgentsRepository agentsRepository,
+    public AgentOrdersRepository(IDbContext dbContext, AgentsRepository agentsRepository,
         OrdersRepository ordersRepository) : base(dbContext)
     {
         _agentsRepository = agentsRepository;

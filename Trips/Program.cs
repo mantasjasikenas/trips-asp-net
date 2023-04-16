@@ -9,7 +9,7 @@ builder.Services
        {
            options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
                _ => "This field is required.");
-           
+
            options.ModelBindingMessageProvider.SetValueIsInvalidAccessor(
                _ => "The value is invalid.");
        })
@@ -24,7 +24,16 @@ builder.Logging
        .AddEventSourceLogger();
 
 
-builder.Services.AddSingleton<DbContext>();
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.AddSingleton<IDbContext, AwsDbContext>();
+}
+else
+{
+    builder.Services.AddSingleton<IDbContext, LocalDbContext>();
+}
+
+
 builder.Services.AddScoped<AgentsRepository>();
 builder.Services.AddScoped<OrdersRepository>();
 builder.Services.AddScoped<AgentOrdersRepository>();

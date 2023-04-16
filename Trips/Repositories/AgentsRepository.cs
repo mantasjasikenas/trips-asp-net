@@ -8,7 +8,7 @@ namespace TripsAgency.Repositories;
 
 public class AgentsRepository : BaseRepository
 {
-    public AgentsRepository(DbContext dbContext) : base(dbContext)
+    public AgentsRepository(IDbContext dbContext) : base(dbContext)
     {
     }
 
