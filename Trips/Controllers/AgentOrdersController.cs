@@ -158,8 +158,12 @@ public class AgentOrdersController : Controller
     [Route("AgentOrders/Edit/{id:int}/DeleteOrder/{index:int}")]
     public ActionResult DeleteOrder(int id, int index, AgentOrdersE agentOrdersE, string returnTo)
     {
-        agentOrdersE.Orders?.RemoveAt(index);
+        agentOrdersE.Orders = agentOrdersE.Orders?.Where((_, i) => i != index).ToList() ??
+                              new List<OrderE>();
+
+        //agentOrdersE.Orders?.RemoveAt(index);
         PopulateSelections();
+        ModelState.Clear();
 
         return View(returnTo, agentOrdersE);
     }

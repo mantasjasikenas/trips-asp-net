@@ -80,7 +80,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @for (var i = 0; i < Model.Orders.Count; i++)
+                @for (var i = 0; i < Model.Orders?.Count; i++)
                 {
                     <tr>
                         <td class="form-group">
@@ -126,7 +126,7 @@
 
                         <td>
                             <button
-                                formnovalidate @* ASP.NET Core magic to prevent client side validation *@
+                                formnovalidate
                                 formaction="@Url.Action("DeleteOrder", new {id = Model.Agent.Id, index = i, returnTo = "Edit"})"
                                 class="btn btn-outline-danger btn-sm">
                                 <i class="fa-solid fa-trash"></i> Delete
