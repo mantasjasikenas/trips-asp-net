@@ -9,10 +9,11 @@ namespace Trips.Controllers;
 public class AgentController : Controller
 {
     private readonly AgentsRepository _agentsRepository;
-    private readonly OrdersRepository _ordersRepository;
     private readonly ILogger<AgentController> _logger;
+    private readonly OrdersRepository _ordersRepository;
 
-    public AgentController(AgentsRepository agentsRepository, OrdersRepository ordersRepository, ILogger<AgentController> logger)
+    public AgentController(AgentsRepository agentsRepository, OrdersRepository ordersRepository,
+        ILogger<AgentController> logger)
     {
         _agentsRepository = agentsRepository;
         _ordersRepository = ordersRepository;

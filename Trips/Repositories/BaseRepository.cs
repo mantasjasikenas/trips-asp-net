@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
-using TripsAgency.Extensions;
 
 namespace TripsAgency.Database;
 

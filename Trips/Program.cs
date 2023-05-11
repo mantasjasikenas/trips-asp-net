@@ -25,18 +25,15 @@ builder.Logging
 
 
 if (!builder.Environment.IsDevelopment())
-{
     builder.Services.AddSingleton<IDbContext, AwsDbContext>();
-}
 else
-{
     builder.Services.AddSingleton<IDbContext, LocalDbContext>();
-}
 
 
 builder.Services.AddScoped<AgentsRepository>();
 builder.Services.AddScoped<OrdersRepository>();
 builder.Services.AddScoped<AgentOrdersRepository>();
+builder.Services.AddScoped<ReportsRepository>();
 
 
 var app = builder.Build();

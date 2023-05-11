@@ -45,7 +45,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.FkTravelAgencyId)
-                @Html.DropDownListFor(m => m.FkTravelAgencyId, (IList<SelectListItem>) ViewData["travelAgencies"]!, "" )
+                @Html.DropDownListFor(m => m.FkTravelAgencyId, (IList<SelectListItem>) ViewData["travelAgencies"]!, "")
                 @Html.ValidationMessageFor(m => m.FkTravelAgencyId, "")
             </div>
 
@@ -60,7 +60,7 @@
                 </a>
                 <button name="save" value="1" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
             </span>
-            
+
         </div>
     }
 </div>

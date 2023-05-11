@@ -4,8 +4,8 @@ namespace TripsAgency.Database;
 
 public class AwsDbContext : IDbContext
 {
-    private readonly ILogger<AwsDbContext> _logger;
     private readonly string _connectionString;
+    private readonly ILogger<AwsDbContext> _logger;
 
     public AwsDbContext(IConfiguration configuration, ILogger<AwsDbContext> logger)
     {

@@ -4,8 +4,8 @@ namespace TripsAgency.Database;
 
 public class LocalDbContext : IDbContext
 {
-    private readonly ILogger<LocalDbContext> _logger;
     private readonly string _connectionString;
+    private readonly ILogger<LocalDbContext> _logger;
 
     public LocalDbContext(IConfiguration configuration, ILogger<LocalDbContext> logger)
     {

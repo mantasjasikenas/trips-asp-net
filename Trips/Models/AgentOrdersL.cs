@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Trips.Models;
+﻿namespace Trips.Models;
 
 public class AgentOrdersL
 {
@@ -12,6 +10,6 @@ public class AgentOrdersL
 public class AgentOrdersE
 {
     public Agent Agent { get; set; }
-    
+
     public List<OrderE>? Orders { get; set; }
 }

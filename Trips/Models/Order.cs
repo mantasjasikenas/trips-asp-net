@@ -54,19 +54,16 @@ public class OrderE : IEquatable<OrderE>
     [Required]
     public int FkTripId { get; set; }
 
+    public bool Equals(OrderE? other)
+    {
+        if (other == null) return false;
+
+        return Id == other.Id;
+    }
+
     public int GetHashCode(OrderE obj)
     {
         return base.GetHashCode();
-    }
-
-    public bool Equals(OrderE? other)
-    {
-        if (other == null)
-        {
-            return false;
-        }
-
-        return Id == other.Id;
     }
 }
 

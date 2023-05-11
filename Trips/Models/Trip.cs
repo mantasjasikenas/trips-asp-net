@@ -51,8 +51,8 @@ public class Trip
     [Required]
     public int FkTravelAgencyId { get; set; }
 
-    [DisplayName("Hotel Service")]
+    /*[DisplayName("Hotel Service")]
     [Column("fk_hotel_service")]
     [Required]
-    public int FkHotelServiceId { get; set; }
+    public int? FkHotelServiceId { get; set; }*/
 }

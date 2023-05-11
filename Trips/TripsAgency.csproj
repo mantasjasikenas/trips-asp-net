@@ -18,14 +18,29 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\README.md">
-        <Link>README.md</Link>
-      </Content>
+        <Content Include="..\README.md">
+            <Link>README.md</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Customer\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\TravelAgency\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Customer\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\TravelAgency\Index.cshtml" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\wwwroot\" />
+    </ItemGroup>
+
+<!--    <Target Name="Install NPM modules" BeforeTargets="Build" Inputs="package-lock.json" Outputs="node_modules/.install-stamp">
+        <Exec Command="npm ci" Condition="'$(OS)' != 'Windows_NT'" />
+        <Exec Command="npm install" Condition="'$(OS)' == 'Windows_NT'" />
+        <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+    </Target>-->
+
+    <Target Name="Compile SCSS" BeforeTargets="CopyFilesToPublishDirectory">
+        <Exec Command="npm run build:css" />
+        <Copy SourceFiles="$(ProjectDir)wwwroot/css/site.css" DestinationFolder="$(PublishDir)wwwroot/css" />
+    </Target>
 
 </Project>

@@ -1,3 +1,4 @@
+
 html {
     font-size: 14px;
 }
@@ -31,3 +32,32 @@ legend {
 input, select, textarea, button {
     margin: 5px;
 }
+
+
+.report {
+
+}
+
+thead.tr {
+    background-color: #BD9334;
+}
+
+tr.group-header {
+    background-color: #a66f6a;
+}
+
+tr.grand-total-header {
+    background-color: #6a84a6;
+}
+
+tr.group-total {
+    font-weight: 1000;
+}
+
+tr.no-data-msg td {
+    color: #B97E49;
+    font-weight: 600;
+}
+
+
+

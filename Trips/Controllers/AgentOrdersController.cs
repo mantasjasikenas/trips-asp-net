@@ -10,8 +10,8 @@ public class AgentOrdersController : Controller
 {
     private readonly AgentOrdersRepository _agentOrdersRepository;
     private readonly AgentsRepository _agentsRepository;
-    private readonly OrdersRepository _ordersRepository;
     private readonly ILogger<AgentOrdersController> _logger;
+    private readonly OrdersRepository _ordersRepository;
 
     public AgentOrdersController(AgentOrdersRepository agentOrdersRepository,
         AgentsRepository agentsRepository,

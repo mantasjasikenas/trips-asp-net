@@ -1,0 +1,186 @@
+﻿@model Trips.Models.TripsReport
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Trips report";
+}
+
+
+<div class="container-fluid d-flex d-row justify-content-center">
+    <h3>@ViewData["title"]</h3>
+</div>
+
+@* content itself *@
+<div class="main-content-rep">
+    @using (Html.BeginForm(FormMethod.Get, new {@class = "rep"}))
+    {
+        @*<p>
+            <strong>Prepared:</strong> @($"{DateTime.Now:yyyy-MM-dd HH:mm}")
+        </p>*@
+
+        <br/>
+        <br/>
+
+        <div class="form-group">
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Min Orders:</label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.MinOrders, new {@class = "number form-control"})
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Min Passengers:</label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.MinPassengers, new {@class = "number form-control"})
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Min Price:</label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.MinPrice, new {@class = "number form-control"})
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Trip Type:</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(m => m.TripType, (IEnumerable<SelectListItem>) ViewData["trip_types"]!, "", new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <br/>
+            <div class="container align-content-start flex-row">
+                <button class="btn btn-outline-info ms-0"><i class="fa-solid fa-filter"></i> Filter</button>
+                <button
+                    formnovalidate
+                    formmethod="get"
+                    formaction="@Url.Action("ResetForm")"
+                    class="btn btn-outline-warning">
+                    <i class="fa-solid fa-plus"></i> Reset
+                </button>
+            </div>
+        </div>
+
+
+        <br/>
+        <br/>
+
+	@* report data *@
+        <table class="report table w-100" cellpadding="5" align="center report">
+            <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].Trip)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].TripType)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].HotelName)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].TripDuration)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].OrdersCount)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].TotalAdults)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].TotalChildren)</th>
+                <th>@Html.DisplayNameFor(m => m.Trips[0].TotalPrice)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Trips.Count == 0)
+            {
+				@* no data message *@
+                <tr class="no-data-msg">
+                    <td colspan="8" align="center">No results found!</td>
+                </tr>
+            }
+            else
+            {
+				@* groups *@
+                @for (var i = 0; i < Model.Trips.Count; i++)
+                {
+					@* group header *@
+                    if (i == 0 || Model.Trips[i].TravelAgency != Model.Trips[i - 1].TravelAgency)
+                    {
+                        <tr class="group-header">
+                            <td
+                                colspan="8"
+                                align="center">
+                                <b>@Html.DisplayFor(m => Model.Trips[i].TravelAgency)</b>
+                            </td>
+                        </tr>
+                    }
+
+					@* group content *@
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.Trips[i].Trip)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].TripType)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].HotelName)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].TripDuration)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].OrdersCount)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].TotalAdults)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].TotalChildren)</td>
+                        <td>@Html.DisplayFor(m => m.Trips[i].TotalPrice)</td>
+
+                    </tr>
+
+					@* group total *@
+                    if (i == Model.Trips.Count - 1 || Model.Trips[i].TravelAgency != Model.Trips[i + 1].TravelAgency)
+                    {
+                        <tr class="group-total table-primary">
+                            <td colspan="4"></td>
+                            <td>
+                                <b>@Html.DisplayFor(m => Model.Trips[i].GroupTotalOrders)</b>
+                            </td>
+                            <td>
+                                <b>@Html.DisplayFor(m => Model.Trips[i].GroupTotalAdults)</b>
+                            </td>
+                            <td>
+                                <b>@Html.DisplayFor(m => Model.Trips[i].GroupTotalChildren)</b>
+                            </td>
+                            <td>
+                                <b>@Html.DisplayFor(m => Model.Trips[i].GroupTotalPrice)</b>
+                            </td>
+
+
+                        </tr>
+                    }
+                }
+
+				@* grand total *@
+                <tr class="grand-total-header">
+                    <td colspan="4"></td>
+                    <td>
+                        <b>Total Orders</b>
+                    </td>
+                    <td>
+                        <b>Total Adults</b>
+                    </td>
+                    <td>
+                        <b>Total Children</b>
+                    </td>
+                    <td>
+                        <b>Total Price</b>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="4"></td>
+                    <td>
+                        <b>@Html.DisplayFor(m => m.TotalOrders)</b>
+                    </td>
+                    <td>
+                        <b>@Html.DisplayFor(m => m.TotalAdults)</b>
+                    </td>
+                    <td>
+                        <b>@Html.DisplayFor(m => m.TotalChildren)</b>
+                    </td>
+                    <td>
+                        <b>@Html.DisplayFor(m => m.TotalPrice)</b>
+                    </td>
+
+
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

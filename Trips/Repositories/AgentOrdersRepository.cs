@@ -121,17 +121,12 @@ public class AgentOrdersRepository : BaseRepository
         _agentsRepository.UpdateAgent(agent.Id, agent);
 
         foreach (var order in modifiedOrders)
-        {
             if (order.Id == 0)
                 _ordersRepository.InsertOrder(order);
             else
                 _ordersRepository.UpdateOrder(order);
-        }
 
-        foreach (var order in removedOrders)
-        {
-            _ordersRepository.CascadeDeleteOrder(order.Id);
-        }
+        foreach (var order in removedOrders) _ordersRepository.CascadeDeleteOrder(order.Id);
     }
 
     public int InsertAgentOrders(AgentOrdersE agentOrdersE)
@@ -148,7 +143,7 @@ public class AgentOrdersRepository : BaseRepository
             order.FkAgentId = agentId;
             _ordersRepository.InsertOrder(order);
         }
-        
+
         return agentId;
     }
 

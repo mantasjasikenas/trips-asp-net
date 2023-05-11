@@ -6,10 +6,7 @@ public class OrderEComparer : IEqualityComparer<OrderE>
 {
     public bool Equals(OrderE? x, OrderE? y)
     {
-        if (x == null || y == null)
-        {
-            return false;
-        }
+        if (x == null || y == null) return false;
 
         return x.Id == y.Id;
     }
@@ -19,5 +16,3 @@ public class OrderEComparer : IEqualityComparer<OrderE>
         return obj.Id.GetHashCode();
     }
 }
-
-    
